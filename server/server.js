@@ -7,10 +7,10 @@ import userRouter from "./routes/userRoutes.js";
 import ownerRouter from "./routes/ownerRoutes.js";
 import bookingRouter from "./routes/bookingRoutes.js";
 
-//initialize app
-const app = express();
+//initialize app 
+const app = express();  //Creates the Express application — the object that handles all incoming HTTP requests.
 //db connection
-await connectDB();
+await connectDB();  //Runs a connection function that connects your server to a MongoDB database
 //middlewares
 app.use(cors());
 app.use(express.json());
