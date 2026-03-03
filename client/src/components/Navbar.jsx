@@ -1,11 +1,29 @@
 import React, { useState } from 'react'
 import {assets, menuLinks} from '../assets/assets'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useAppContext } from '../context/AppContext'
 
-const Navbar = ({setShowLogin}) => {
+const Navbar = () => {
+    const {setShowLogin,user,logout,isowner,axios,setIsowner}=useAppContext()
+
+
     const location = useLocation()
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
+
+    const changeRole = async ()=>{
+        try{
+            const {data} = await axios.post('/api/owner/change-role')
+            if(data.success){
+                setIsowner(true)
+                toast.success(data.message)
+            }else{
+                toast.error(data.message)
+            }
+        }catch(error){
+                toast.error(error.message)
+            }
+    }
   return (
     <div className={`flex items-center justify-between px-6 md:px-16 lg:px-24
     xl:px-32 py-4 text-gray-600 border-b border-borderColor relative transition-all
@@ -31,9 +49,9 @@ const Navbar = ({setShowLogin}) => {
         </div>
 
         <div className='flex max-sm:flex-col items-start  sm:items-center gap-6'>
-            <button onClick={()=> navigate('/owner')} className='cursor-pointer'>Dashboard</button>
-            <button onClick={()=> setShowLogin(true)} className='cursor-pointer px-8 py-2 bg-primary hover:bg-priary-dull transition-all
-            text-white rounded-lg'>Login</button>
+            <button onClick={()=> {isOwner ? navigate('/owner') : changeRole()}} className='cursor-pointer'>{isowner? 'Dashboard' :'List Cars'}</button>
+            <button onClick={()=>{user ? logout() : setShowLogin(true)}} className='cursor-pointer px-8 py-2 bg-primary hover:bg-priary-dull transition-all
+            text-white rounded-lg'>{user? 'Logout' : 'Login'}</button>
         </div>
     </div>  
 
