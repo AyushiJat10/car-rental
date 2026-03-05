@@ -1,2 +1,25 @@
-node_modules
+# dependencies
+node_modules/
+
+# environment variables
 .env
+.env.*
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# build folders
+dist/
+build/
+
+# Vite
+.vite/
+
+# Docker
+.dockerignore
