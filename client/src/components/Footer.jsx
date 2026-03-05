@@ -1,12 +1,25 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import {delay, motion} from 'motion/react'
 
 const Footer = () => {
   return (
-     <div className='text-gray-500/80 pt-8 px-6 md:px-16 lg:px-24 xl:px-32'>
-            <div className='flex flex-wrap justify-between gap-12 md:gap-6'>
+     <motion.div
+          initial={{opacity: 0, y:30}}
+          whileInView={{opacity: 1, y:0}}
+          transition={{duration: 0.6}}
+     className='text-gray-500/80 pt-8 px-6 md:px-16 lg:px-24 xl:px-32'>
+            <div 
+            initial={{opacity: 0, y:20}}
+          whileInView={{opacity: 1, y:0}}
+          transition={{duration: 0.6, delay:0.2}}
+            className='flex flex-wrap justify-between gap-12 md:gap-6'>
                 <div className='max-w-80'>
-                    <img src={assets.logo} alt="logo" className='mb-4 h-8 md:h-9' />
+                    <motion.img
+                     initial={{opacity: 0}}
+          whileInView={{opacity: 1}}
+          transition={{duration: 0.5, delay:0.3}}
+                     src={assets.logo} alt="logo" className='mb-4 h-8 md:h-9' />
                     <p className='text-sm'>
                         Premium Car rental Serivice with wide selection of luxury and everyday vehicles for all your driving needs
                     </p>
@@ -75,7 +88,7 @@ const Footer = () => {
                     <li><a href="#">Sitemap</a></li>
                 </ul>
             </div>
-        </div>
+        </motion.div>
   )
 }
 
